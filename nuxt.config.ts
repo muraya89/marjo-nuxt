@@ -8,12 +8,27 @@ export default defineNuxtConfig({
     },
   },
   css: [
-    "~/assets/css/main.css",
-    "primevue/resources/themes/lara-light-green/theme.css",
-    "primeicons/primeicons.css"
+    // "~/assets/css/main.css",
+    "primevue/resources/themes/lara-light-blue/theme.css",
+    // "primevue/resources/themes/lara-light-green/theme.css",
+    // "primeicons/primeicons.css"
   ],
+  googleFonts: {
+    families: {
+      Rubik: true,
+    },
+  },
+  tailwindcss: {
+    cssPath: '~/assets/css/tailwind.css',
+    configPath: 'tailwind.config',
+    exposeConfig: true,
+    exposeLevel: 2,
+    config: {},
+    injectPosition: 'first',
+    viewer: true,
+  },
   modules: [
-    'nuxt-primevue'
+    'nuxt-primevue','@nuxtjs/tailwindcss', '@nuxtjs/google-fonts', "@hebilicious/vue-query-nuxt"
   ],
   primevue: {
       usePrimeVue: true,
@@ -21,9 +36,8 @@ export default defineNuxtConfig({
         ripple: true,
       },
       importPT: undefined,
-      cssLayerOrder: 'tailwind-base, primevue, tailwind-utilities',
+      // cssLayerOrder: 'tailwind-base, primevue, tailwind-utilities',
       components: {
-          prefix: 'Prime-',
           name: undefined,
           include: '*',
           exclude: undefined
@@ -41,6 +55,9 @@ export default defineNuxtConfig({
           exclude: undefined
       }
   },
+  // plugins: [
+  //   "@/plugins/vue-query.ts",
+  // ],
   runtimeConfig: {
     // Private keys are only available on the server
     apiSecret: '123',

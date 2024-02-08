@@ -33,6 +33,18 @@ export default {
         outline: '#e2e7f1',
         outlineDark: '#ced6e3',
       },
+      fontSize: {
+        main: '0.7rem',
+        base: '0.4rem',
+        xl: '1.25rem',
+        '2xl': '1.563rem',
+        '3xl': '1.953rem',
+        '4xl': '2.441rem',
+        '5xl': '3.052rem',
+      },
+      borderRadius: {
+        'large': '18px',
+      }
     },
   },
   plugins: [],

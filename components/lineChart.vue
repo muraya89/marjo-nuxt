@@ -14,7 +14,7 @@ const setChartData = () => {
     const documentStyle = getComputedStyle(document.body);
 
     return {
-        labels: ['A', 'B', 'C'],
+        labels: ['Cyan', 'Orange', 'Gray'],
         datasets: [
             {
                 data: [540, 325, 702],
@@ -48,7 +48,7 @@ const setChartOptions = () => {
 </template>
 <style>
 canvas{
-    height: 300px !important;
+    height: 215px !important;
     margin: 0 auto;
 }
 </style>

@@ -1,9 +1,9 @@
 <template>
     {{ router.params }}
-    <Card class="p-10 shadow-sm" v-if="!isLoading">
+    <Card class="p-10 shadow-sm text-main" v-if="!isLoading">
         <template #header>
             <div class="md:grid grid-cols-7">
-                <Button text rounded severity="secondary" class="col-span-1" icon="pi pi-arrow-left" @click.prevent="goBack()"></Button>
+                <Button text rounded severity="secondary" class="col-span-1" icon="pi pi-arrow-left" @click.prevent="navigateTo('/')"></Button>
                 <Button outlined severity="warning" icon="pi pi-pencil" class="col-end-10" label="edit" v-if="!edit" @click.prevent="edit=true"></Button>
             </div>
         </template>

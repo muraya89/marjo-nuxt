@@ -2,7 +2,8 @@
 <Bar
     id="my-chart-id"
     :options="chartOptions"
-    :data="chartData"/>
+    :data="chartData"
+    class="max-w-md"/>
 </template>
 <script setup>
 import { Bar } from "vue-chartjs"
@@ -17,3 +18,11 @@ const chartData = reactive({
 })
 const chartOptions = reactive({ responsive: true })
 </script>
+<style>
+canvas{
+    height: 200px !important;
+    margin: 0 auto;
+    width: auto !important;
+    /* max-width: 400px !important; */
+}
+</style>

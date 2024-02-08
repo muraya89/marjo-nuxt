@@ -1,20 +1,34 @@
 <template>
     <Toast autoZIndex :baseZIndex="5" />
-    <div class="grid grid-rows-1 grid-flow-col grid-cols-4 gap-4">
-        <div class="row-span-1 col-span-2 bg-white items-center rounded-lg p-12">
+    <div class="basis-1/2 grid grid-cols-2 mb-4 rounded-large bg-white p-5 place-items-center">
+        <div class="justify-self-start text-center ml-5">{{ res.length}} &nbsp;Team members</div>
+        <div class="justify-self-end">
+            <AvatarGroup>
+                <template v-for="image in res?.slice(0, 40)" class="flex items-center">
+                    <Avatar :image="image.image" shape="circle"/>
+                </template>
+                <template class="flex items-center ">
+                    <Avatar :label="`+${res.length - 40}`" shape="circle" class="text-main"/>
+                </template>
+            </AvatarGroup>
+        </div>
+    </div>
+
+    <div class="flex flex-row gap-4">
+        <div class="basis-1/2 bg-white items-center rounded-lg px-10 py-6">
             <!-- <img alt="Vue logo" src="https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/407.jpg" height="90" /> -->
             <div class="text-slate-500 uppercase grid grid-cols-9 mb-4">
-                <div class="col-start-1 col-span-2 border-l-8 border-black pl-2 bg-slate-200 rounded-r-md min-h-12 items-center flex">
+                <div class="col-start-1 sm:col-span-3 md:col-span-2 border-l-8 border-black pl-2 bg-slate-200 rounded-r-md max-h-8 items-center flex">
                     <p class="">resources</p>
                 </div>
                 <div class="col-end-9">
-                    <Button>
-                        <i class="pi pi-plus mr-2"></i>    
-                        new
+                    <Button class="h-5">
+                        <i class="pi pi-plus mr-2 text-main"></i>   
+                        <span class="text-main">new</span> 
                     </Button>
                 </div>
             </div>
-            <DataTable :value="res" class="cursor-pointer" scroll-height="400px" stripedRows scrollable >
+            <DataTable :value="res" class="cursor-pointer text-main" size="small" scroll-height="500px" @row-click="handleSelectItem" stripedRows scrollable >
                 <Column field="id" header="ID"></Column>
                 <Column field="name" header="Name"></Column>
                 <Column field="color" header="Color">
@@ -28,7 +42,7 @@
                     </template>
                 </Column>
                 <Column field="manufacturedBy" header="Manufacturer"></Column>
-                <Column field="" header="Actions">
+                <!-- <Column field="" header="Actions">
                     <template #body="slotProps">
                         <i class="pi pi-ellipsis-v cursor-pointer" @click="toggle($event), handleSelectItem(slotProps)" aria-haspopup="true" aria-controls="overlay_menu"></i>
                         <Menu ref="menu" :model="menu_items(slotProps)" id="overlay_menu" :popup="true">
@@ -40,7 +54,7 @@
                             </template>
                         </Menu>
                     </template>
-                </Column>
+                </Column> -->
             </DataTable>
 
             <Dialog v-model:visible="dialogVisible" modal header="Dialog" class="max-h-96 max-w-prose" position="right">
@@ -63,8 +77,8 @@
             </Dialog>
         </div>
 
-        <div class="row-span-1 col-span-2 auto-rows-fr">
-            <div class="bg-white row-span-1 mb-4 p-12 rounded-lg">
+        <div class="basis-1/2">
+            <div class="bg-white mb-4 px-10 py-6 rounded-lg">
                 <Title label="Bar Stats">
                     <template #button>
                         hello
@@ -73,7 +87,7 @@
                 <BarChart />
             </div>
 
-            <div class="bg-white row-span-1 p-12 rounded-lg">
+            <div class="bg-white px-10 py-6 rounded-lg">
                 <Title label="Line Stats">
                     <template #button>
                         hello
@@ -84,8 +98,13 @@
         </div>
         
     </div>
-    <div class="flex gap-12 mt-12">
-        <div class="basis-1/2 bg-white rounded-lg">
+
+    <div class="flex gap-4 mt-4">
+        <div class="basis-2/3 bg-white rounded-lg">
+            <Chats />
+        </div>
+        <div class="basis-1/3 bg-white rounded-lg py-3 px-3">
+            <Progress :label="'Material 1'" :resources="res" />
         </div>
     </div>
 </template>
@@ -96,6 +115,8 @@ import {ref, onMounted} from 'vue'
 import Title from "@/components/shared/Title.vue"
 import BarChart from '@/components/BarChart.vue'
 import LineChart from '@/components/lineChart.vue'
+import Chats from '@/components/Chats.vue'
+import Progress from '@/components/Progress.vue'
 
 definePageMeta({
     layout: "default"
@@ -135,7 +156,8 @@ const toggle = (event: Event) => {
     menu.value.toggle(event)
 }
 const handleSelectItem = (item: object) => {
-    selectedItem.value = item
+    selectedItem.value = item.data
+    navigateTo({path: `/${item.data?.name}`})
 }
 </script>
 <style scoped>
